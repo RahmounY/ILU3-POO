@@ -2,7 +2,7 @@ package cartes;
 
 public class JeuDeCartes {
 
-	private Configuration[] typesDeCartes;
+    private Configuration[] typesDeCartes;
 
     public JeuDeCartes() {
         typesDeCartes = new Configuration[] {
@@ -38,20 +38,42 @@ public class JeuDeCartes {
         }
         return sb.toString();
     }
-    
+
+
     public Carte[] donnerCartes() {
-        int totalCartes = 0;
+
+        int total = 0;
         for (Configuration config : typesDeCartes) {
-            totalCartes += config.getNbExemplaires();
+            total += config.getNbExemplaires();
         }
-        
-        Carte[] cartes = new Carte[totalCartes];
+
+
+        Carte[] toutesLesCartes = new Carte[total];
         int index = 0;
         for (Configuration config : typesDeCartes) {
             for (int i = 0; i < config.getNbExemplaires(); i++) {
-                cartes[index++] = config.getCarte();
+                toutesLesCartes[index++] = config.getCarte();
             }
         }
-        return cartes;
+        return toutesLesCartes;
+    }
+
+
+    public static class Configuration {
+        private int nbExemplaires;
+        private Carte carte;
+
+        public Configuration(Carte carte, int nbExemplaires) {
+            this.carte = carte;
+            this.nbExemplaires = nbExemplaires;
+        }
+
+        public Carte getCarte() {
+            return carte;
+        }
+
+        public int getNbExemplaires() {
+            return nbExemplaires;
+        }
     }
 }
